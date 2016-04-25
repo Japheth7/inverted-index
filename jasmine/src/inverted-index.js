@@ -11,6 +11,3 @@ class InvertedIndex {
     }
 }
 
-
-//var index = new InvertedIndex();
-//console.log(index.loadData('../books.json'));
