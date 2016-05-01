@@ -27,7 +27,7 @@ class InvertedIndex {
             // returns an array of lowercase words from the string created
             var normalised = concat.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(" ");
 
-            // Set converts the array to a Set datatype with unique values
+            // convert the array to a Set datatype with unique values
             var uniqueKeys = new Set(normalised);
             // converts the set datatype to an array
             var uniqueKeysArray = Array.from(uniqueKeys);
@@ -42,14 +42,16 @@ class InvertedIndex {
         var result = [];
         for(var i = 0; i < this.index.length; i++) {
             for (var t = 0; t < terms.length; t++) {
-                // if the object's array unique keys contains the term(s)
+                // if the object's array unique keys contains the term
                 // push the object index into the result array.
                 if ($.inArray(terms[t], this.index[i]['keys']) !== -1) {
                     result.push(i)
                 }
             }
         }
-        return result;
+        var uniqueResult = new Set(result);
+        var UniqueResultArray = Array.from(uniqueResult);
+        return UniqueResultArray;
     }
 }
 

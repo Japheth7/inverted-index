@@ -35,7 +35,9 @@ describe('Inverted Index', function(){
         it("returns the index of the object containing the searchIndex term", function(){
             index = invertedIndex.getIndex(invertedIndex.data);
             expect(invertedIndex.searchIndex(['alice'])).toEqual([0]);
+            expect(invertedIndex.searchIndex(['alice', 'wonderland'])).toEqual([0]);
             expect(invertedIndex.searchIndex(['rings'])).toEqual([1]);
+            expect(invertedIndex.searchIndex(['lord', 'rings'])).toEqual([1]);
             expect(invertedIndex.searchIndex(['alice', 'rings'])).toEqual([0, 1]);
             expect(invertedIndex.searchIndex(['not a term'])).toEqual([]);
         })
