@@ -37,6 +37,20 @@ class InvertedIndex {
 
         return index
     }
+
+    searchIndex(terms){
+        var result = [];
+        for(var i = 0; i < this.index.length; i++) {
+            for (var t = 0; t < terms.length; t++) {
+                // if the object's array unique keys contains the term(s)
+                // push the object index into the result array.
+                if ($.inArray(terms[t], this.index[i]['keys']) !== -1) {
+                    result.push(i)
+                }
+            }
+        }
+        return result;
+    }
 }
 
 

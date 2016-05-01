@@ -29,7 +29,15 @@ describe('Inverted Index', function(){
        it("Checks if string keys map to the correct object in the object array", function(){
            expect(invertedIndex.index[0]['keys']).toContain('alice');
            expect(invertedIndex.index[1]['keys']).toContain('rings');
-           console.log(invertedIndex.index)
        });
    });
+    describe("Search Index", function(){
+        it("returns the index of the object containing the searchIndex term", function(){
+            index = invertedIndex.getIndex(invertedIndex.data);
+            expect(invertedIndex.searchIndex(['alice'])).toEqual([0]);
+            expect(invertedIndex.searchIndex(['rings'])).toEqual([1]);
+            expect(invertedIndex.searchIndex(['alice', 'rings'])).toEqual([0, 1]);
+            expect(invertedIndex.searchIndex(['not a term'])).toEqual([]);
+        })
+    });
 });
