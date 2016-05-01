@@ -9,6 +9,7 @@ describe('Inverted Index', function(){
         invertedIndex.index = [];
         invertedIndex.loadData('./books.json').done(function(data){
             invertedIndex.data = data;
+            invertedIndex.index = invertedIndex.getIndex(data);
             done();
         });
     });
@@ -22,13 +23,13 @@ describe('Inverted Index', function(){
 
    describe('Populate Index', function(){
        it("Checks if index is created", function(){
-           var index = invertedIndex.createIndex(invertedIndex.data);
-           expect(index).toBeDefined();
+           expect(invertedIndex.index).toBeDefined();
+           expect(invertedIndex.index).not.toEqual([]);
        });
        it("Checks if string keys map to the correct object in the object array", function(){
-           var index = invertedIndex.createIndex(invertedIndex.data);
-           expect(index[0]['keys']).toContain('alice');
-           expect(index[1]['keys']).toContain('rings');
+           expect(invertedIndex.index[0]['keys']).toContain('alice');
+           expect(invertedIndex.index[1]['keys']).toContain('rings');
+           console.log(invertedIndex.index)
        });
    });
 });
