@@ -17,7 +17,7 @@ class InvertedIndex {
      * @param data
      * @returns {{}|*}
      */
-    getIndex(data) {
+    createIndex(data) {
         for(var doc = 0; doc < data.length; doc++){
 
             // get the unique words from the object content
@@ -34,6 +34,10 @@ class InvertedIndex {
                 }
             }
         }
+
+    }
+
+    getIndex(){
         return this.index
     }
 

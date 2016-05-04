@@ -9,7 +9,8 @@ describe('Inverted Index', function(){
         expect(invertedIndex.index).toEqual({});
         invertedIndex.loadData('./books.json').done(function(data){
             invertedIndex.data = data;
-            invertedIndex.index = invertedIndex.getIndex(data);
+            invertedIndex.createIndex(data);
+            invertedIndex.index = invertedIndex.getIndex();
             done();
         });
     });
