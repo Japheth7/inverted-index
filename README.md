@@ -18,6 +18,8 @@ npm install -g http-server
 ```
 
 **Running tests**
+
 ***cd*** into your project root in your terminal and run the command ```http-server```
+
 Open your browser and go to ```http://192.168.8.183:8080/jasmine/SpecRunner.html```
 
