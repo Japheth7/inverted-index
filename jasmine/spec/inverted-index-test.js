@@ -34,12 +34,12 @@ describe('Inverted Index', function(){
    });
     describe("Search Index", function(){
         it("returns the index of the object containing the searchIndex term", function(){
-            expect(invertedIndex.searchIndex('alice')).toEqual([[0]]);
-            expect(invertedIndex.searchIndex('loRd Alice')).toEqual([[1], [0]]);
-            expect(invertedIndex.searchIndex(['rings'])).toEqual([[1]]);
-            expect(invertedIndex.searchIndex(['alice', 'rings'])).toEqual([[0], [1]]);
-            expect(invertedIndex.searchIndex('a')).toEqual([[0, 1]]);
-            expect(invertedIndex.searchIndex(['Japheth'])).toEqual([[-1]]);
+            expect(invertedIndex.searchIndex('alice')).toEqual([0]);
+            expect(invertedIndex.searchIndex('loRd Alice')).toEqual([1, 0]);
+            expect(invertedIndex.searchIndex(['rings'])).toEqual([1]);
+            expect(invertedIndex.searchIndex(['alice', 'rings'])).toEqual([0, 1]);
+            expect(invertedIndex.searchIndex('a')).toEqual([0, 1]);
+            expect(invertedIndex.searchIndex(['Japheth'])).toEqual([-1]);
         })
     });
 });

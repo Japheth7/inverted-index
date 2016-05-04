@@ -27,7 +27,7 @@ class InvertedIndex {
                 // if word is not in index assign it the value of the object's position
                 if (!(words[word] in this.index)){
                     this.index[words[word]] = [doc];
-                }else{
+                } else {
                     // else push the other objects position.
                     // ie if it was {a: [0]}, now will be {a: [0, 1]}
                     this.index[words[word]].push(doc)
@@ -55,12 +55,13 @@ class InvertedIndex {
             // check if the term is in the index
             if((termsArray[term] in this.index)){
                 // if it is push it value to the results array
-                results.push(this.index[termsArray[term]])
+                results = results.concat(this.index[termsArray[term]])
             }else{
                 // if it's not push -1 into the results array
-                results.push([-1])
+               results = results.concat([-1])
             }
         }
+        console.log(results);
         return results;
     }
 
