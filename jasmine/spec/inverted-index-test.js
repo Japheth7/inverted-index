@@ -16,7 +16,6 @@ describe('Inverted Index', function(){
 
    describe('Read book data', function(){
         it('Checks that json file is not empty', function(){
-            expect(invertedIndex.data).toBeDefined();
             expect(invertedIndex.data.length).not.toEqual(0);
         })
    });
@@ -25,6 +24,7 @@ describe('Inverted Index', function(){
        it("Checks if index is created", function(){
            expect(invertedIndex.index).toBeDefined();
            expect(invertedIndex.index).not.toEqual([]);
+           console.log(invertedIndex.index);
        });
        it("Checks if string keys map to the correct object in the object array", function(){
            expect(invertedIndex.index[0]['keys']).toContain('alice');

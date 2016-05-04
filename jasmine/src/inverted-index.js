@@ -35,7 +35,6 @@ class InvertedIndex {
             indexedKeys.push({'title': element['title'], 'keys': uniqueKeysArray});
         });
 
-        console.log(indexedKeys);
         return indexedKeys;
     }
 
@@ -55,8 +54,3 @@ class InvertedIndex {
         return UniqueResultArray;
     }
 }
-
-
-
-
-
