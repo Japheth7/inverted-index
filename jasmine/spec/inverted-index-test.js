@@ -6,7 +6,7 @@ describe('Inverted Index', function(){
 
     beforeEach(function(done){
         invertedIndex = new InvertedIndex();
-        invertedIndex.index = [];
+        expect(invertedIndex.index).toEqual([]);
         invertedIndex.loadData('./books.json').done(function(data){
             invertedIndex.data = data;
             invertedIndex.index = invertedIndex.getIndex(data);
@@ -33,7 +33,6 @@ describe('Inverted Index', function(){
    });
     describe("Search Index", function(){
         it("returns the index of the object containing the searchIndex term", function(){
-            index = invertedIndex.getIndex(invertedIndex.data);
             expect(invertedIndex.searchIndex(['alice'])).toEqual([0]);
             expect(invertedIndex.searchIndex(['alice', 'wonderland'])).toEqual([0]);
             expect(invertedIndex.searchIndex(['rings'])).toEqual([1]);
