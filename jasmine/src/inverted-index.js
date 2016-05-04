@@ -4,7 +4,7 @@ class InvertedIndex {
 
     constructor() {
         this.data = [];
-        this.index = [];
+        this.index = {};
     }
 
     // Uses JQuery for convenient loading of data from a json file
@@ -12,45 +12,78 @@ class InvertedIndex {
         return ($.getJSON(filePath));
     }
 
-    // Creates an inverted index from the json file
+    /**
+     * Takes data from a json file an returns an index object
+     * @param data
+     * @returns {{}|*}
+     */
     getIndex(data) {
-        var indexedKeys = [];
-        data.forEach(function (element) {
-            var keys = Object.keys(element);
-            var concat= '';
+        for(var doc = 0; doc < data.length; doc++){
 
-            // creates a string of the objects values
-            keys.forEach(function(key){
-                concat += ' ' + element[key];
-            });
+            // get the unique words from the object content
+            var words = this.docWords(data[doc]);
 
-            // returns an array of lowercase words from the string created
-            var normalised = concat.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(' ');
-
-            // convert the array to a Set datatype with unique values
-            var uniqueKeys = new Set(normalised);
-            // converts the set datatype to an array
-            var uniqueKeysArray = Array.from(uniqueKeys);
-
-            indexedKeys.push({'title': element['title'], 'keys': uniqueKeysArray});
-        });
-
-        return indexedKeys;
-    }
-
-    searchIndex(terms){
-        var result = [];
-        for(var i = 0; i < this.index.length; i++) {
-            for (var t = 0; t < terms.length; t++) {
-                // if the object's array unique keys contains the term
-                // push the object index into the result array.
-                if ($.inArray(terms[t], this.index[i]['keys']) !== -1) {
-                    result.push(i)
+            for(var word in words){
+                // if word is not in index assign it the value of the object's position
+                if (!(words[word] in this.index)){
+                    this.index[words[word]] = [doc];
+                }else{
+                    // else push the other objects position.
+                    // ie if it was {a: [0]}, now will be {a: [0, 1]}
+                    this.index[words[word]].push(doc)
                 }
             }
         }
-        var uniqueResult = new Set(result);
-        var UniqueResultArray = Array.from(uniqueResult);
-        return UniqueResultArray;
+        return this.index
+    }
+
+    /**
+     * Takes a term or list of terms and returns the index of the document its present in
+     * @param terms
+     * @returns {Array} an array of results
+     */
+    searchIndex(terms){
+        var termsArray = [];
+        if(typeof(terms) === "string"){
+            // if the search term is a string, break it down to an array of unique words
+            termsArray = this.processText(terms);
+        }else{
+            termsArray = terms;
+        }
+        var results = [];
+        for(var term = 0; term < termsArray.length; term++){
+            // check if the term is in the index
+            if((termsArray[term] in this.index)){
+                // if it is push it value to the results array
+                results.push(this.index[termsArray[term]])
+            }else{
+                // if it's not push -1 into the results array
+                results.push([-1])
+            }
+        }
+        return results;
+    }
+
+
+    /**
+     * It takes a book object an returns an array of unique terms
+     * @param bookDocument a book object
+     * @returns {Array} array of unique words
+     */
+    docWords(bookDocument){
+        var content = bookDocument.title +' '+ bookDocument.text;
+        return this.processText(content)
+    }
+
+    /**
+     * It takes a book object's content and returns an array of unique values
+     * @param text  contents of the book object
+     * @returns {Array} array of unique words
+     */
+    processText(text){
+        var normalised = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(' ');
+        var uniqueWords = new Set(normalised);
+        return Array.from(uniqueWords);
+
     }
 }
