@@ -16,18 +16,26 @@ describe('Inverted Index', function(){
     });
 
    describe('Read book data', function(){
-        it('Checks that json file is not empty', function(){
+        it('checks that json file is not empty', function(){
             expect(invertedIndex.data.length).not.toEqual(0);
             console.log(invertedIndex.index);
-        })
+        });
+       it('ensures each object in json array contain a property whose value is a string', function(){
+           for(var obj in invertedIndex.data){
+               var keys = Object.keys(invertedIndex.data[obj]);
+               keys.forEach(function(key){
+                   expect(typeof(invertedIndex.data[obj][key])).toEqual('string');
+               });
+           }
+       });
    });
 
    describe('Populate Index', function(){
-       it("Checks if index is created", function(){
+       it("checks if index is created", function(){
            expect(invertedIndex.index).toBeDefined();
            expect(invertedIndex.index).not.toEqual({});
        });
-       it("Checks if string keys map to the correct object in the object array", function(){
+       it("checks if string keys map to the correct object in the object array", function(){
            expect(invertedIndex.index['alice']).toEqual([0]);
            expect(invertedIndex.index['rings']).toEqual([1]);
            expect(invertedIndex.index['a']).toEqual([0, 1]);
