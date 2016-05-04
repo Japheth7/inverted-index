@@ -14,10 +14,10 @@ class InvertedIndex {
 
     // Creates an inverted index from the json file
     getIndex(data) {
-        var index = [];
+        var indexedKeys = [];
         data.forEach(function (element) {
             var keys = Object.keys(element);
-            var concat = " ";
+            var concat= '';
 
             // creates a string of the objects values
             keys.forEach(function(key){
@@ -25,17 +25,18 @@ class InvertedIndex {
             });
 
             // returns an array of lowercase words from the string created
-            var normalised = concat.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(" ");
+            var normalised = concat.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(' ');
 
             // convert the array to a Set datatype with unique values
             var uniqueKeys = new Set(normalised);
             // converts the set datatype to an array
             var uniqueKeysArray = Array.from(uniqueKeys);
 
-            index.push({'title': element['title'], 'keys': uniqueKeysArray});
+            indexedKeys.push({'title': element['title'], 'keys': uniqueKeysArray});
         });
 
-        return index
+        console.log(indexedKeys);
+        return indexedKeys;
     }
 
     searchIndex(terms){
