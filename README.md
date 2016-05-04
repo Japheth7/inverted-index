@@ -1,7 +1,6 @@
 # Inverted index
-A simple implementation of an [inverted index](https://www.elastic.co/guide/en/elasticsearch/guide/current/inverted-index.html)
+An implementation of [inverted index](https://www.elastic.co/guide/en/elasticsearch/guide/current/inverted-index.html)
 
-## Running tests
 **Prerequisites**
 * [Node.js & npm](https://docs.npmjs.com/getting-started/installing-node)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
