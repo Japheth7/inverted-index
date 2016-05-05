@@ -18,8 +18,8 @@ describe('Inverted Index', function(){
    describe('Read book data', function(){
         it('checks that json file is not empty', function(){
             expect(invertedIndex.data.length).not.toEqual(0);
-            console.log(invertedIndex.index);
         });
+
        it('ensures each object in json array contain a property whose value is a string', function(){
            for(var obj in invertedIndex.data){
                var keys = Object.keys(invertedIndex.data[obj]);

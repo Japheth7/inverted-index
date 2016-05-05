@@ -21,7 +21,7 @@ class InvertedIndex {
         for(var doc = 0; doc < data.length; doc++){
 
             // get the unique words from the object content
-            var words = this.docWords(data[doc]);
+            var words = this.getUniqueWords(data[doc]);
 
             for(var word in words){
                 // if word is not in index assign it the value of the object's position
@@ -38,7 +38,7 @@ class InvertedIndex {
     }
 
     getIndex(){
-        return this.index
+        return this.index;
     }
 
     /**
@@ -57,7 +57,7 @@ class InvertedIndex {
         var results = [];
         for(var term = 0; term < termsArray.length; term++){
             // check if the term is in the index
-            if((termsArray[term] in this.index)){
+            if(termsArray[term] in this.index){
                 // if it is push it value to the results array
                 results = results.concat(this.index[termsArray[term]])
             }else{
@@ -65,7 +65,6 @@ class InvertedIndex {
                results = results.concat([-1])
             }
         }
-        console.log(results);
         return results;
     }
 
@@ -75,7 +74,7 @@ class InvertedIndex {
      * @param bookDocument a book object
      * @returns {Array} array of unique words
      */
-    docWords(bookDocument){
+    getUniqueWords(bookDocument){
         var content = bookDocument.title +' '+ bookDocument.text;
         return this.processText(content)
     }
@@ -87,6 +86,9 @@ class InvertedIndex {
      */
     processText(text){
         var normalised = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(' ');
+        // var names = ['prosper', prosper]
+        // var uniqueProsper = new Set(names)
+        // uniqueProsper = {'prosper'}
         var uniqueWords = new Set(normalised);
         return Array.from(uniqueWords);
 
