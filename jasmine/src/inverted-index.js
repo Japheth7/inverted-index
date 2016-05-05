@@ -9,7 +9,7 @@ class InvertedIndex {
 
     // Uses JQuery for convenient loading of data from a json file
     loadData(filePath) {
-        return ($.getJSON(filePath));
+        return $.getJSON(filePath);
     }
 
     /**
