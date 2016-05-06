@@ -4,15 +4,13 @@
 describe('Inverted Index', function(){
     var invertedIndex;
 
-    beforeEach(function(done){
+    beforeEach(function(){
         invertedIndex = new InvertedIndex();
         expect(invertedIndex.index).toEqual({});
-        invertedIndex.loadData('./books.json').done(function(data){
-            invertedIndex.data = data;
-            invertedIndex.createIndex(data);
-            invertedIndex.index = invertedIndex.getIndex();
-            done();
-        });
+        invertedIndex.data = invertedIndex.loadData('books.json');
+        invertedIndex.createIndex(invertedIndex.data);
+        invertedIndex.index = invertedIndex.getIndex();
+
     });
 
    describe('Read book data', function(){

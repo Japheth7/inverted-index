@@ -7,9 +7,23 @@ class InvertedIndex {
         this.index = {};
     }
 
-    // Uses JQuery for convenient loading of data from a json file
-    loadData(filePath) {
-        return $.getJSON(filePath);
+    // Loads data from file in the path given
+    loadData(filepath){
+    var request = new XMLHttpRequest();
+      request.open('GET', filepath, false);
+      request.send(null);
+      if (request.status === 200) {
+        if (request.responseText.trim().length === 0) {
+          throw Error('the file is empty');
+        }
+        try {
+          return JSON.parse(''+request.responseText);
+        } catch (e) {
+            console.log(typeof(request.responseText));
+          throw e
+        }
+      }
+      throw Error('unable to open file');
     }
 
     /**
@@ -30,7 +44,7 @@ class InvertedIndex {
                 } else {
                     // else push the other objects position.
                     // ie if it was {a: [0]}, now will be {a: [0, 1]}
-                    this.index[words[word]].push(doc)
+                    this.index[words[word]].push(doc);
                 }
             }
         }
@@ -48,7 +62,7 @@ class InvertedIndex {
      */
     searchIndex(terms){
         var termsArray = [];
-        if(typeof(terms) === "string"){
+        if(typeof(terms) === 'string'){
             // if the search term is a string, break it down to an array of unique words
             termsArray = this.processText(terms);
         }else{
@@ -59,10 +73,10 @@ class InvertedIndex {
             // check if the term is in the index
             if(termsArray[term] in this.index){
                 // if it is push it value to the results array
-                results = results.concat(this.index[termsArray[term]])
+                results = results.concat(this.index[termsArray[term]]);
             }else{
                 // if it's not push -1 into the results array
-               results = results.concat([-1])
+               results = results.concat([-1]);
             }
         }
         return results;
@@ -76,7 +90,7 @@ class InvertedIndex {
      */
     getUniqueWords(bookDocument){
         var content = bookDocument.title +' '+ bookDocument.text;
-        return this.processText(content)
+        return this.processText(content);
     }
 
     /**
