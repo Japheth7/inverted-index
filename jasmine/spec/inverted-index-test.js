@@ -26,6 +26,24 @@ describe('Inverted Index', function(){
                });
            }
        });
+
+       it('throws an error when file is not found', function(){
+         expect(function(){
+         invertedIndex.loadData('not_exist.json')
+         }).toThrow(new Error('unable to open file'));
+       });
+
+       it('throws an error when file is an empty json file', function(){
+         expect(function(){
+         invertedIndex.loadData('empty.json');
+         }).toThrow(new Error('the file is empty'));
+       });
+
+       it('throws an error when the json file is invalid', function(){
+         expect(function(){
+          invertedIndex.loadData('invalid.json');
+         }).toThrow(new Error('invalid json file'));
+       });
    });
 
    describe('Populate Index', function(){

@@ -14,16 +14,15 @@ class InvertedIndex {
       request.send(null);
       if (request.status === 200) {
         if (request.responseText.trim().length === 0) {
-          throw Error('the file is empty');
+          throw new Error('the file is empty');
         }
         try {
-          return JSON.parse(''+request.responseText);
+          return JSON.parse(request.responseText);
         } catch (e) {
-            console.log(typeof(request.responseText));
-          throw e
+          throw new Error('invalid json file');
         }
       }
-      throw Error('unable to open file');
+      throw new Error('unable to open file');
     }
 
     /**
