@@ -10,19 +10,19 @@ class InvertedIndex {
   // Loads data from file in the path given
   loadData(filepath) {
     var request = new XMLHttpRequest();
-      request.open('GET', filepath, false);
-      request.send(null);
-      if (request.status === 200) {
-        if (request.responseText.trim().length === 0) {
-          throw new Error('the file is empty');
-        }
-        try {
-          return JSON.parse(request.responseText);
-        } catch (e) {
-          throw new Error('invalid json file');
-        }
+    request.open('GET', filepath, false);
+    request.send(null);
+    if (request.status === 200) {
+      if (request.responseText.trim().length === 0) {
+        throw new Error('the file is empty');
       }
-      throw new Error('unable to open file');
+      try {
+        return JSON.parse(request.responseText);
+      } catch (e) {
+        throw new Error('invalid json file');
+      }
+    }
+    throw new Error('unable to open file');
   }
 
     /**
