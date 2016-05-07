@@ -25,11 +25,11 @@ class InvertedIndex {
     throw new Error('unable to open file');
   }
 
-    /**
-     * Takes data from a json file an returns an index object
-     * @param data
-     * @returns {{}|*}
-     */
+  /**
+  * Takes data from a json file an returns an index object
+  * @param data
+  * @returns {{}|*}
+  */
   createIndex(data) {
     for (var doc = 0; doc < data.length; doc++) {
 
