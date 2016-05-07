@@ -17,7 +17,7 @@ describe('Inverted Index', function() {
       expect(invertedIndex.data.length).not.toEqual(0);
     });
 
-    it('ensures each object in json array contain a property whose value is a string', function(){
+    it('ensures each object in json array contain a property whose value is a string', function() {
       for (var obj in invertedIndex.data) {
         var keys = Object.keys(invertedIndex.data[obj]);
         keys.forEach(function(key) {

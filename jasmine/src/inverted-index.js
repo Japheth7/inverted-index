@@ -103,10 +103,9 @@ class InvertedIndex {
   * @returns {Array} array of unique words
   */
   processText(text) {
-        var normalised = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(' ');
-        var uniqueWords = new Set(normalised);
-        return Array.from(uniqueWords);
-
+    var normalised = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase().split(' ');
+    var uniqueWords = new Set(normalised);
+    return Array.from(uniqueWords);
   }
 }
 
